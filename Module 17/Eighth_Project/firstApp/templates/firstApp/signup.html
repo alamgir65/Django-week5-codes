@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% if messages %}
+{% for m in messages %}
+<small {% if m.tags %} class="bg-success" {% endif %} >{{m}}</small>
+{% endfor %}
+{% endif %}
+
+<form method='POST' style="width:50%; margin:auto" novalidate>
+    {% csrf_token %}
+
+    {{form | crispy}}
+    {% comment %} {%for i in form%}
+    {{ i.label_tag}}
+    {{i}}
+    {{i.errors|striptags}}
+    {%endfor%} {% endcomment %}
+
+    <button class="btn btn-outline-success" type="submit">Submit</button>
+</form>
+
+
+{% endblock  %}
