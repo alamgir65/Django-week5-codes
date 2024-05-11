@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% for m in messages %}
+<h5 class="text-success">{{m}}</h5>
+{% endfor %}
+
+<form method='POST' style="width:50%; margin:auto;">
+    <h5>Edit Your Info from Here.</h5>
+
+    
+
+</form>
+
+{% endblock  %}
