@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="d-flex flex-wrap px-5 pt-3 align-items-center">
+  <div class="col-6 ">
+    <h1>Welcome to Our Django Project.</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem animi odit ea fuga maiores illo perspiciatis accusamus vero aliquam dolorum perferendis aperiam, ducimus amet recusandae suscipit. Expedita doloribus hic voluptatibus eum ex soluta asperiores voluptatum? Rem laudantium suscipit pariatur aliquam saepe inventore est error alias architecto unde! Maxime incidunt consequuntur est facilis consequatur laudantium nostrum commodi quia debitis non molestias temporibus error assumenda, amet voluptates! Cum totam nostrum, pariatur assumenda ducimus dolorem sapiente, odio a iusto eos, architecto facilis suscipit praesentium! Recusandae, aliquid fugit. Iusto ad dicta voluptatem, consequatur veniam deleniti aut, nam harum temporibus minus voluptatum officia totam voluptates?</p>
+  </div>
+  <div  class="col-6">
+    <img class="px-3" style="width:80%;" src="{% static 'header.jpg' %}" alt="Image">
+  </div>
+</div>
+
+<div class="d-flex flex-wrap p-2">
+  <div class='col-2 p-4 bg-white'>
+    <h5>All Categories : </h5>
+    {% for category in categories %}
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+      <label class="form-check-label" for="flexRadioDefault1">       
+        <a class="text-decoration-none" href="{% url 'category_wise' category.slug %}">{{category.name}}</a>
+      </label>
+    </div>
+    {% endfor %}
+
+  </div>
+  <div class='col-10'>
+    <div class="d-flex flex-wrap justify-content-center px-5">
+      {% for data in datas %}
+      <div class="col-sm-4 mb-3 mb-sm-0 pt-3">
+          <div class="card mx-2 ">
+            <div class="card-body">
+              <img src="{{data.images.url}}" class="card-img-top" alt="Image">
+              <h5 class="card-title"><a class="text-decoration-none text-dark" href="{% url 'post_detail' data.id %}">{{data.title}}</h5>
+              <p class="card-text">{{data.content |truncatewords:10}} </p>
+              <p> Author : {{data.author.first_name}}  {{data.author.last_name}} </p>
+  
+              <p> Category : 
+                  {% for i in data.category.all %}
+                  <button class='btn btn-primary btn-sm m-2' disabled> {{i.name}} </button>
+                  {% endfor %}
+              </p>
+  
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      
+    </div>
+  </div>
+</div>
+
+{% endblock  %}
